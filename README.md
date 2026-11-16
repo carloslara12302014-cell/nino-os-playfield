@@ -1,5 +1,7 @@
 # Nino OS Playfield (Playfield Desktop)
 
+[**Open the app**](https://carloslara12302014-cell.github.io/nino-os-playfield/)
+
 Playfield Desktop is an original desktop-style app launcher with a Windows 11-inspired layout. The project is named `nino-os-playfield` on GitHub so it is easy to find when searching for “nino-os github.” It includes a few familiar desktop utilities, browser-game links, Opera GX, Google Search, and a local play-guide demo. It is not Windows, the Nino OS project, or affiliated with Microsoft or Nino OS. Its default dark abstract wallpaper is drawn with CSS; Settings can switch to a blue theme.
 
 ## Run it
