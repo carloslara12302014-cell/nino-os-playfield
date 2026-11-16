@@ -42,8 +42,8 @@ function suggestGame(query) {
   if (/action|fast|quick|compete|energy|multiplayer/i.test(query)) {
     return "Ready for some energy? Shell Shockers has arena action, while Tag is a quick chase. Check the game site's rules and availability.";
   }
-  if (/opera|browser/i.test(query)) {
-    return "The Opera GX shortcut is in the top-right corner. It opens Opera's official site in a new tab; this page doesn't install or control a browser.";
+  if (/google|search|browser|web/i.test(query)) {
+    return "Use the Google Search shortcut in the top-right corner to open Google in a new tab. Playfield doesn't embed or control a browser.";
   }
   if (/school|blocked|filter|bypass|unblock/i.test(query)) {
     return "I can't help bypass school filters or device rules. Use games and websites only when your network and school policies allow them.";
@@ -60,3 +60,64 @@ chatForm.addEventListener("submit", (event) => {
   chatInput.value = "";
   chatInput.focus();
 });
+
+const appWindow = document.querySelector("#app-window");
+const startButton = document.querySelector("#start-button");
+const startMenu = document.querySelector("#start-menu");
+const taskbarApp = document.querySelector("#taskbar-app");
+const maximizeButton = document.querySelector("#maximize-window");
+const desktopClock = document.querySelector("#desktop-clock");
+
+function setStartMenuOpen(open) {
+  startMenu.hidden = !open;
+  startButton.setAttribute("aria-expanded", String(open));
+}
+
+startButton.addEventListener("click", () => {
+  setStartMenuOpen(startMenu.hidden);
+});
+
+document.querySelectorAll("[data-close-start]").forEach((item) => {
+  item.addEventListener("click", () => setStartMenuOpen(false));
+});
+
+document.addEventListener("click", (event) => {
+  if (!startMenu.hidden && !startMenu.contains(event.target) && !startButton.contains(event.target)) {
+    setStartMenuOpen(false);
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") setStartMenuOpen(false);
+});
+
+document.querySelector("#minimize-window").addEventListener("click", () => {
+  appWindow.hidden = true;
+  taskbarApp.setAttribute("aria-pressed", "false");
+});
+
+document.querySelector("#close-window").addEventListener("click", () => {
+  appWindow.hidden = true;
+  taskbarApp.setAttribute("aria-pressed", "false");
+});
+
+taskbarApp.addEventListener("click", () => {
+  appWindow.hidden = false;
+  taskbarApp.setAttribute("aria-pressed", "true");
+  setStartMenuOpen(false);
+});
+
+maximizeButton.addEventListener("click", () => {
+  const maximized = appWindow.classList.toggle("is-maximized");
+  maximizeButton.setAttribute("aria-pressed", String(maximized));
+});
+
+function updateClock() {
+  desktopClock.textContent = new Intl.DateTimeFormat(undefined, {
+    hour: "numeric",
+    minute: "2-digit"
+  }).format(new Date());
+}
+
+updateClock();
+window.setInterval(updateClock, 30_000);
