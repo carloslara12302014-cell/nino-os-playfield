@@ -45,7 +45,8 @@ const templates = {
       <a href="https://itch.io/games/html5" target="_blank" rel="noopener noreferrer"><span class="site-icon site-orange">✿</span><strong>itch.io HTML5</strong><small>Independent games to explore</small><span class="row-arrow">↗</span></a>
       <a href="https://poki.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-green">●</span><strong>Poki</strong><small>Quick games for your browser</small><span class="row-arrow">↗</span></a>
       <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-blue">G</span><strong>Google Search</strong><small>Search the web</small><span class="row-arrow">↗</span></a>
-    </div></div>`,
+    </div>
+    <p class="privacy-note">The App Store logo is a trademark of Apple Inc.; this project is not affiliated with Apple. <a href="https://logos-world.net/" target="_blank" rel="noopener noreferrer">Logo source</a>.</p></div>`,
   notepad: `<div class="notepad-toolbar"><span>Untitled — Notepad</span><span>Text stays in this tab only</span></div><textarea class="notepad-area" aria-label="Notepad text" placeholder="Start typing..."></textarea>`,
   calculator: `<div class="calculator-wrap"><div class="calculator-heading"><span>Calculator</span><small>Standard</small></div><output class="calculator-display" id="calculator-display" aria-live="polite">0</output>
     <div class="calculator-keys">
