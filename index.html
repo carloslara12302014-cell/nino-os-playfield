@@ -3,17 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#246bb3">
+    <meta name="theme-color" content="#0c0d12">
     <meta name="description" content="A playful Windows-inspired desktop with useful app shortcuts and browser games.">
     <title>Playfield Desktop</title>
-    <link rel="stylesheet" href="desktop.css?v=3">
+    <link rel="stylesheet" href="desktop.css?v=4">
     <script src="app.js?v=3" defer></script>
   </head>
   <body>
     <main class="desktop" id="desktop">
       <header class="desktop-widgets">
-        <div class="welcome-widget"><span class="widget-spark">✦</span><span>Make today a little more playful</span></div>
-        <div class="clock-widget"><time id="desktop-time"></time><span id="desktop-date"></span></div>
+        <div class="welcome-widget">
+          <span class="widget-spark" aria-hidden="true">✦</span>
+          <span class="welcome-copy"><strong>Good to see you</strong><small>Make today a little more playful</small></span>
+        </div>
+        <div class="clock-widget">
+          <span class="clock-label"><i aria-hidden="true"></i> LOCAL TIME</span>
+          <time id="desktop-time"></time>
+          <span id="desktop-date"></span>
+        </div>
       </header>
 
       <section class="desktop-icons" aria-label="Desktop apps">
