@@ -162,13 +162,18 @@ document.addEventListener("click", (event) => {
   if (!startMenu.hidden && !startMenu.contains(event.target) && !startButton.contains(event.target) && !taskbarSearch.contains(event.target)) closeStartMenu();
 });
 
-document.querySelector("#minimize-window").addEventListener("click", () => {
+function hideAppWindow() {
   appWindow.hidden = true;
   taskbarApp.setAttribute("aria-pressed", "false");
-});
+}
+
+document.querySelector("#back-to-desktop").addEventListener("click", hideAppWindow);
+document.querySelector("#minimize-window").addEventListener("click", hideAppWindow);
 document.querySelector("#close-window").addEventListener("click", () => {
-  appWindow.hidden = true;
-  taskbarApp.setAttribute("aria-pressed", "false");
+  hideAppWindow();
+  taskbarApp.hidden = true;
+  appWindow.classList.remove("is-maximized");
+  document.querySelector("#maximize-window").setAttribute("aria-pressed", "false");
 });
 document.querySelector("#maximize-window").addEventListener("click", (event) => {
   const maximized = appWindow.classList.toggle("is-maximized");
