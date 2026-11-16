@@ -1,6 +1,6 @@
 # Playfield
 
-Playfield Desktop is an original desktop-style app launcher with a Windows 11-inspired layout. It includes a few familiar desktop utilities, browser-game links, Opera GX, Google Search, and a local play-guide demo. It is not Windows, the Nino OS project, or affiliated with Microsoft or Nino OS.
+Playfield Desktop is an original desktop-style app launcher with a Windows 11-inspired layout. It includes a few familiar desktop utilities, browser-game links, Opera GX, Google Search, and a local play-guide demo. It is not Windows, the Nino OS project, or affiliated with Microsoft or Nino OS. Its default dark abstract wallpaper is drawn with CSS; Settings can switch to a blue theme.
 
 ## Run it
 

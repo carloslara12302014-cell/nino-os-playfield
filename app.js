@@ -56,13 +56,14 @@ const templates = {
     </div></div>`,
   settings: `<div class="app-toolbar"><strong>Settings</strong><span class="app-muted">Make this desktop yours</span></div><div class="settings-content">
     <div class="settings-heading"><span class="settings-big-icon">⚙</span><div><h2>Personalization</h2><p>Choose the feel of your Playfield desktop.</p></div></div>
-    <div class="setting-row"><div><strong>Desktop wallpaper</strong><small>Switch between the blue and evening color themes.</small></div><button class="toggle-button" id="wallpaper-toggle" type="button" aria-pressed="false">Try evening colors</button></div>
+    <div class="setting-row"><div><strong>Desktop wallpaper</strong><small>Switch between the dark and blue color themes.</small></div><button class="toggle-button" id="wallpaper-toggle" type="button" aria-pressed="false">Use blue wallpaper</button></div>
     <div class="setting-row"><div><strong>Privacy</strong><small>Apps here are demos and external links; this page stores no personal data.</small></div><span class="setting-status">On this device</span></div>
     <p class="privacy-note">Playfield is an original desktop-style demo, not Windows and not affiliated with Microsoft.</p>
   </div>`,
   games: `<div class="app-toolbar"><strong>Games</strong><span class="app-muted">Your little game library</span></div>
     <div class="games-heading"><div><span class="mini-label">BROWSER ARCADE</span><h2>Pick your next game</h2></div>
       <div class="game-filters"><button class="selected" data-game-filter="all">All</button><button data-game-filter="Puzzle">Puzzle</button><button data-game-filter="Cozy">Cozy</button><button data-game-filter="Action">Action</button></div></div>
+    <a class="all-games-shortcut" href="https://browlu27.github.io/gamessite.github.io/" target="_blank" rel="noopener noreferrer"><span class="all-games-icon">✦</span><span><strong>All Games</strong><small>Open the full game collection</small></span><span class="row-arrow">↗</span></a>
     <div class="game-list">${gameLinks.map((game) => `<a class="game-row" data-category="${game.category}" href="${game.url}" target="_blank" rel="noopener noreferrer"><span class="game-row-icon">${game.category === "Puzzle" ? "▦" : game.category === "Cozy" ? "☼" : "✦"}</span><span class="game-row-copy"><strong>${game.name}</strong><small>${game.description}</small></span><span class="game-category">${game.category}</span><span class="row-arrow">↗</span></a>`).join("")}</div>
     <p class="privacy-note">External games only work where permitted. Availability and age ratings vary by site.</p>`,
   guide: `<div class="guide-wrap"><div class="app-hero"><span class="mini-label">LOCAL DEMO · NOT A LIVE AI</span><h2>Play Guide</h2><p>Tell the guide your mood and get a suggestion from this page. Messages are not sent or stored.</p></div>
@@ -213,9 +214,9 @@ function setupGameFilters() {
 function setupSettings() {
   const button = document.querySelector("#wallpaper-toggle");
   button.addEventListener("click", () => {
-    const evening = desktop.classList.toggle("evening-wallpaper");
-    button.setAttribute("aria-pressed", String(evening));
-    button.textContent = evening ? "Use blue wallpaper" : "Try evening colors";
+    const blue = desktop.classList.toggle("blue-wallpaper");
+    button.setAttribute("aria-pressed", String(blue));
+    button.textContent = blue ? "Use dark wallpaper" : "Use blue wallpaper";
   });
 }
 
