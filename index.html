@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#11131b">
+    <meta name="description" content="A cozy launchpad for discovering browser games and picking your next play.">
+    <title>Playfield — your little corner of play</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Playfield home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span>playfield<span class="brand-period">.</span></span>
+        </a>
+        <nav class="top-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#discover">Discover</a>
+          <a class="nav-link" href="#arcade">Arcade</a>
+          <a class="nav-link" href="#guide">Play guide</a>
+        </nav>
+        <a class="browser-link" href="https://www.opera.com/gx" target="_blank" rel="noopener noreferrer">
+          <span class="browser-icon" aria-hidden="true">↗</span>
+          <span>Opera GX <span class="browser-note">opens in a new tab</span></span>
+        </a>
+      </header>
+
+      <main>
+        <section class="hero" id="discover">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="status-dot"></span> A small space for big play</div>
+            <h1>Your next<br>little <span>adventure.</span></h1>
+            <p class="hero-description">A hand-picked launchpad for browser games, creative breaks, and whatever sounds fun right now.</p>
+            <a class="primary-button" href="#arcade">Find a game <span aria-hidden="true">↓</span></a>
+            <p class="permission-note"><span aria-hidden="true">✳</span> Play only where games and sites are permitted.</p>
+          </div>
+          <div class="hero-art" aria-label="Illustration of a floating game console and stars">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="spark spark-one">✦</div>
+            <div class="spark spark-two">✳</div>
+            <div class="spark spark-three">·</div>
+            <div class="planet"></div>
+            <div class="console">
+              <div class="console-screen">
+                <span class="screen-sun"></span>
+                <span class="screen-hill hill-one"></span>
+                <span class="screen-hill hill-two"></span>
+                <span class="screen-star">✦</span>
+              </div>
+              <div class="console-controls">
+                <span class="dpad"><i></i><b></b></span>
+                <span class="action-buttons"><i></i><b></b></span>
+              </div>
+            </div>
+            <div class="art-caption"><span class="caption-line"></span> TAKE A QUICK BREAK</div>
+          </div>
+        </section>
+
+        <section class="shortcut-strip" aria-label="Quick links">
+          <div class="strip-label"><span class="strip-spark">✳</span> QUICK JUMPS</div>
+          <a href="https://www.crazygames.com/" target="_blank" rel="noopener noreferrer"><span class="jump-icon purple">◈</span> CrazyGames <span class="external">↗</span></a>
+          <a href="https://itch.io/games/html5" target="_blank" rel="noopener noreferrer"><span class="jump-icon orange">✿</span> itch.io HTML5 <span class="external">↗</span></a>
+          <a href="https://poki.com/" target="_blank" rel="noopener noreferrer"><span class="jump-icon green">●</span> Poki <span class="external">↗</span></a>
+          <span class="strip-footnote">External sites may be unavailable on some networks.</span>
+        </section>
+
+        <section class="arcade-section" id="arcade">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow section-eyebrow">THE ARCADE</div>
+              <h2>Pick your mood<span class="heading-period">.</span></h2>
+            </div>
+            <div class="filter-row" role="group" aria-label="Filter games">
+              <button class="filter-button selected" type="button" data-filter="all">All games</button>
+              <button class="filter-button" type="button" data-filter="puzzle">Puzzles</button>
+              <button class="filter-button" type="button" data-filter="cozy">Cozy</button>
+              <button class="filter-button" type="button" data-filter="action">Action</button>
+            </div>
+          </div>
+
+          <div class="game-grid">
+            <a class="game-card card-lilac" data-category="puzzle" href="https://www.crazygames.com/game/2048" target="_blank" rel="noopener noreferrer">
+              <div class="card-art art-tiles" aria-hidden="true"><span>2</span><span>4</span><span>8</span><span class="tile-blank"></span></div>
+              <div class="game-meta"><span class="game-type">PUZZLE · QUICK</span><span class="card-arrow">↗</span></div>
+              <h3>2048</h3>
+              <p>Slide, combine, and chase the next number.</p>
+            </a>
+            <a class="game-card card-peach" data-category="cozy" href="https://www.crazygames.com/game/eggys-car" target="_blank" rel="noopener noreferrer">
+              <div class="card-art art-drive" aria-hidden="true"><span class="road"></span><span class="car">●</span><span class="cloud cloud-a"></span><span class="cloud cloud-b"></span></div>
+              <div class="game-meta"><span class="game-type">COZY · DRIVING</span><span class="card-arrow">↗</span></div>
+              <h3>Eggy Car</h3>
+              <p>Take the scenic route. Keep your egg safe.</p>
+            </a>
+            <a class="game-card card-mint" data-category="action" href="https://www.crazygames.com/game/shell-shockers" target="_blank" rel="noopener noreferrer">
+              <div class="card-art art-egg" aria-hidden="true"><span class="egg-shape"></span><span class="egg-shine"></span><span class="egg-shadow"></span></div>
+              <div class="game-meta"><span class="game-type">ACTION · MULTIPLAYER</span><span class="card-arrow">↗</span></div>
+              <h3>Shell Shockers</h3>
+              <p>Egg-shaped action in a lively arena.</p>
+            </a>
+            <a class="game-card card-blue" data-category="puzzle" href="https://www.crazygames.com/game/word-wipe" target="_blank" rel="noopener noreferrer">
+              <div class="card-art art-letters" aria-hidden="true"><span>W</span><span>O</span><span>R</span><span>D</span><span>S</span></div>
+              <div class="game-meta"><span class="game-type">PUZZLE · WORDS</span><span class="card-arrow">↗</span></div>
+              <h3>Word Wipe</h3>
+              <p>Spot words, clear the board, beat the clock.</p>
+            </a>
+            <a class="game-card card-yellow" data-category="cozy" href="https://www.crazygames.com/game/little-alchemy-2" target="_blank" rel="noopener noreferrer">
+              <div class="card-art art-alchemy" aria-hidden="true"><span>☁</span><i>+</i><b>✦</b><em>☼</em></div>
+              <div class="game-meta"><span class="game-type">COZY · CREATIVE</span><span class="card-arrow">↗</span></div>
+              <h3>Little Alchemy 2</h3>
+              <p>Mix simple things to discover something new.</p>
+            </a>
+            <a class="game-card card-pink" data-category="action" href="https://www.crazygames.com/game/tag" target="_blank" rel="noopener noreferrer">
+              <div class="card-art art-tag" aria-hidden="true"><span class="tag-runner">➤</span><span class="tag-dot dot-a"></span><span class="tag-dot dot-b"></span><span class="tag-dot dot-c"></span></div>
+              <div class="game-meta"><span class="game-type">ACTION · QUICK</span><span class="card-arrow">↗</span></div>
+              <h3>Tag</h3>
+              <p>Dash around and don't be the one who's it.</p>
+            </a>
+          </div>
+          <p class="grid-footnote">Games open on their original sites in a new tab. Availability and age ratings vary by site.</p>
+        </section>
+
+        <section class="guide-section" id="guide">
+          <div class="guide-intro">
+            <div class="guide-icon">✳</div>
+            <div class="eyebrow section-eyebrow">YOUR PLAY GUIDE</div>
+            <h2>Not sure what<br>to play?</h2>
+            <p>Tell the guide your mood. It can suggest something from this page—no account or personal info needed.</p>
+            <div class="demo-label"><span></span> LOCAL DEMO · NOT A LIVE AI</div>
+          </div>
+          <div class="chat-panel">
+            <div class="chat-topline"><span class="chat-avatar">✳</span><div><strong>Play guide</strong><small>Here to help you pick</small></div><span class="online-indicator">DEMO</span></div>
+            <div class="chat-messages" id="chat-messages" aria-live="polite">
+              <div class="message guide-message"><span class="message-avatar">✳</span><p>Hey! What kind of break are you in the mood for? Try “something cozy” or “a quick puzzle.”</p></div>
+            </div>
+            <form class="chat-form" id="chat-form">
+              <label class="sr-only" for="chat-input">Tell the play guide what you feel like playing</label>
+              <input id="chat-input" name="message" type="text" maxlength="160" placeholder="I feel like playing..." autocomplete="off">
+              <button type="submit" aria-label="Send message">↑</button>
+            </form>
+            <div class="chat-disclaimer">Demo replies are generated on this page. No messages are sent or stored.</div>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <a class="brand footer-brand" href="#" aria-label="Playfield home"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span>playfield<span class="brand-period">.</span></span></a>
+          <span>A little room to play. Be kind to your time.</span>
+          <a href="https://www.opera.com/gx" target="_blank" rel="noopener noreferrer">Visit Opera GX <span aria-hidden="true">↗</span></a>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
