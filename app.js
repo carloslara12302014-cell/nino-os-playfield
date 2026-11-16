@@ -42,8 +42,11 @@ function suggestGame(query) {
   if (/action|fast|quick|compete|energy|multiplayer/i.test(query)) {
     return "Ready for some energy? Shell Shockers has arena action, while Tag is a quick chase. Check the game site's rules and availability.";
   }
-  if (/google|search|browser|web/i.test(query)) {
-    return "Use the Google Search shortcut in the top-right corner to open Google in a new tab. Playfield doesn't embed or control a browser.";
+  if (/opera|gx|browser/i.test(query)) {
+    return "The Opera GX shortcut is in the top-right corner. It opens Opera's official site in a new tab; this page doesn't install or control the browser.";
+  }
+  if (/google|search|web/i.test(query)) {
+    return "Use the Google Search link in the Start menu or footer to open Google in a new tab. Playfield doesn't embed or control a browser.";
   }
   if (/school|blocked|filter|bypass|unblock/i.test(query)) {
     return "I can't help bypass school filters or device rules. Use games and websites only when your network and school policies allow them.";
