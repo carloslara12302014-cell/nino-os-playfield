@@ -104,8 +104,8 @@ a { color: inherit; text-decoration: none; }
 .icon-notepad { color: #3677b4; background: linear-gradient(145deg,#fff,#dcecff); }
 .icon-calculator { color: #44617f; background: linear-gradient(145deg,#f8fbff,#d7e1ed); }
 .icon-settings { color: #5d7087; background: linear-gradient(145deg,#fff,#e1e9f2); }
-.icon-games { color: #8957bd; background: linear-gradient(145deg,#ffe6ba,#f5b5c8); }
-.icon-guide { color: #398665; background: linear-gradient(145deg,#e1ffed,#a9e3ca); }
+.icon-games { color: transparent; font-size: 0; background: #10131d url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/PlayStation_App_Icon.jpg/960px-PlayStation_App_Icon.jpg") center / cover no-repeat; }
+.icon-guide { color: transparent; font-size: 0; background: #fff url("https://img.icons8.com/pulsar-line/1200/chatgpt.jpg") center / cover no-repeat; }
 .icon-opera { color: #c33c52; background: linear-gradient(145deg,#fff,#ffe1e7); font-size: 19px; }
 .icon-google { color: #4285f4; background: linear-gradient(145deg,#fff,#f1f5fb); font-size: 21px; }
 
@@ -132,6 +132,8 @@ a { color: inherit; text-decoration: none; }
 .window-app { display: flex; align-items: center; gap: 9px; color: #35465e; font-size: 12px; }
 .window-app-icon { width: 21px; height: 21px; display: grid; place-items: center; border-radius: 5px; background: #e9f2fc; color: #347bc2; }
 .window-app-icon.app-icon { width: 24px; height: 24px; min-height: 24px; border-radius: 6px; font-size: 14px; }
+.window-app-icon.icon-games, .window-app-icon.icon-guide { font-size: 0; }
+.taskbar-app-icon.icon-games, .taskbar-app-icon.icon-guide { width: 27px; height: 27px; display: inline-block; border-radius: 6px; font-size: 0; }
 .window-controls { display: flex; height: 100%; }
 .window-controls button { width: 45px; border: 0; background: transparent; color: #46566b; cursor: pointer; font-size: 15px; }
 .window-controls button:hover { background: rgba(80,110,145,.1); }

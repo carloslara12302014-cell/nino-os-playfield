@@ -9,6 +9,7 @@ Open `index.html` in a modern browser. No install, build step, account, or serve
 ## Notes
 
 - Browser shortcuts and games open third-party websites in a new tab. Their availability, content, and age ratings are controlled by those sites and the network you use.
+- The Games icon links to a PlayStation app icon from Wikimedia Commons. PlayStation is a Sony trademark; this project is not affiliated with Sony or PlayStation. The Play Guide icon is by Icons8, credited in the app.
 - Use games and websites only where permitted. This page does not bypass network or device restrictions.
 - File Explorer is a visual demo and does not access device files. Notepad text is not saved.
 - The Play Guide is a local demo, not a live AI; it does not send or store messages.

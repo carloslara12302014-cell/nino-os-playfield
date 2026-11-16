@@ -66,11 +66,11 @@ const templates = {
       <div class="game-filters"><button class="selected" data-game-filter="all">All</button><button data-game-filter="Puzzle">Puzzle</button><button data-game-filter="Cozy">Cozy</button><button data-game-filter="Action">Action</button></div></div>
     <a class="all-games-shortcut" href="https://browlu27.github.io/gamessite.github.io/" target="_blank" rel="noopener noreferrer"><span class="all-games-icon">✦</span><span><strong>All Games</strong><small>Open the full game collection</small></span><span class="row-arrow">↗</span></a>
     <div class="game-list">${gameLinks.map((game) => `<a class="game-row" data-category="${game.category}" href="${game.url}" target="_blank" rel="noopener noreferrer"><span class="game-row-icon">${game.category === "Puzzle" ? "▦" : game.category === "Cozy" ? "☼" : "✦"}</span><span class="game-row-copy"><strong>${game.name}</strong><small>${game.description}</small></span><span class="game-category">${game.category}</span><span class="row-arrow">↗</span></a>`).join("")}</div>
-    <p class="privacy-note">External games only work where permitted. Availability and age ratings vary by site.</p>`,
+    <p class="privacy-note">External games only work where permitted. Availability and age ratings vary by site. The PlayStation icon is a trademark of Sony Interactive Entertainment; this project is not affiliated with Sony or PlayStation. <a href="https://commons.wikimedia.org/wiki/File:PlayStation_App_Icon.jpg" target="_blank" rel="noopener noreferrer">Icon source</a>.</p>`,
   guide: `<div class="guide-wrap"><div class="app-hero"><span class="mini-label">LOCAL DEMO · NOT A LIVE AI</span><h2>Play Guide</h2><p>Tell the guide your mood and get a suggestion from this page. Messages are not sent or stored.</p></div>
     <div class="guide-chat" id="guide-chat" aria-live="polite"><div class="guide-message">Hi! Want something cozy, a quick puzzle, or an action game?</div></div>
     <form class="guide-form" id="guide-form"><label class="sr-only" for="guide-input">Message the play guide</label><input id="guide-input" maxlength="160" placeholder="What are you in the mood for?" autocomplete="off"><button type="submit">Send</button></form>
-    <p class="privacy-note">I can't help bypass school filters or device rules. Play only where permitted.</p></div>`
+    <p class="privacy-note">I can't help bypass school filters or device rules. Play only where permitted. <a href="https://icons8.com/" target="_blank" rel="noopener noreferrer">Chat icon by Icons8</a>.</p></div>`
 };
 
 function buildStartMenu() {
