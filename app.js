@@ -1,126 +1,302 @@
-const filterButtons = document.querySelectorAll(".filter-button");
-const gameCards = document.querySelectorAll(".game-card");
+const desktop = document.querySelector("#desktop");
+const appWindow = document.querySelector("#app-window");
+const appContent = document.querySelector("#app-content");
+const startButton = document.querySelector("#start-button");
+const startMenu = document.querySelector("#start-menu");
+const startSearch = document.querySelector("#start-search");
+const startAppGrid = document.querySelector("#start-app-grid");
+const taskbarApp = document.querySelector("#taskbar-app");
+const taskbarAppTitle = document.querySelector("#taskbar-app-title");
+const gameLinks = [
+  { name: "2048", category: "Puzzle", description: "Slide, combine, and chase the next number.", url: "https://www.crazygames.com/game/2048" },
+  { name: "Eggy Car", category: "Cozy", description: "Take the scenic route and keep your egg safe.", url: "https://www.crazygames.com/game/eggys-car" },
+  { name: "Shell Shockers", category: "Action", description: "Egg-shaped action in a lively arena.", url: "https://www.crazygames.com/game/shell-shockers" },
+  { name: "Word Wipe", category: "Puzzle", description: "Spot words, clear the board, beat the clock.", url: "https://www.crazygames.com/game/word-wipe" },
+  { name: "Little Alchemy 2", category: "Cozy", description: "Mix simple things to discover something new.", url: "https://www.crazygames.com/game/little-alchemy-2" },
+  { name: "Tag", category: "Action", description: "Dash around and don't be the one who's it.", url: "https://www.crazygames.com/game/tag" }
+];
 
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const filter = button.dataset.filter;
-    filterButtons.forEach((item) => item.classList.toggle("selected", item === button));
-    gameCards.forEach((card) => {
-      card.hidden = filter !== "all" && card.dataset.category !== filter;
-    });
+const appCatalog = [
+  { id: "explorer", name: "File Explorer", glyph: "▰", icon: "icon-folder", keywords: "files folders documents" },
+  { id: "edge", name: "Microsoft Edge", glyph: "e", icon: "icon-edge", url: "https://www.microsoft.com/edge", keywords: "internet browser web" },
+  { id: "store", name: "Store", glyph: "▣", icon: "icon-store", keywords: "games sites marketplace" },
+  { id: "notepad", name: "Notepad", glyph: "▤", icon: "icon-notepad", keywords: "notes text write" },
+  { id: "calculator", name: "Calculator", glyph: "＋", icon: "icon-calculator", keywords: "math numbers" },
+  { id: "settings", name: "Settings", glyph: "⚙", icon: "icon-settings", keywords: "personalize wallpaper" },
+  { id: "games", name: "Games", glyph: "✦", icon: "icon-games", keywords: "arcade play puzzle action" },
+  { id: "guide", name: "Play Guide", glyph: "✳", icon: "icon-guide", keywords: "helper suggestions chat" },
+  { id: "opera", name: "Opera GX", glyph: "O", icon: "icon-opera", url: "https://www.opera.com/gx", keywords: "browser web gaming" },
+  { id: "google", name: "Google Search", glyph: "G", icon: "icon-google", url: "https://www.google.com/", keywords: "search web internet" }
+];
+
+const templates = {
+  explorer: `<div class="app-toolbar"><span>Home</span><span>›</span><strong>Quick access</strong></div>
+    <div class="explorer-layout"><aside class="explorer-sidebar"><strong>Home</strong><span>★ &nbsp; Favorites</span><span>▣ &nbsp; Desktop</span><span>▤ &nbsp; Documents</span><span>↓ &nbsp; Downloads</span></aside>
+    <div class="explorer-content"><h2>Quick access</h2><p class="app-muted">A few handy places to start.</p>
+    <button class="folder-card" data-app="games"><span>✦</span><strong>Games</strong><small>6 browser games</small></button>
+    <button class="folder-card" data-app="store"><span>▣</span><strong>Game sites</strong><small>Browse available sites</small></button>
+    <button class="folder-card" data-app="notepad"><span>▤</span><strong>Notes</strong><small>Open a local notepad</small></button>
+    <p class="privacy-note">This is a visual demo. It does not access your device files.</p></div></div>`,
+  store: `<div class="app-toolbar"><strong>Store</strong><span class="app-muted">Places to discover browser games</span></div>
+    <div class="app-page"><div class="app-hero"><span class="mini-label">BROWSE THE WEB</span><h2>Pick a place to play</h2><p>These links open their original websites in a new tab. Site access depends on your network.</p></div>
+    <div class="site-grid">
+      <a href="https://www.crazygames.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-purple">◈</span><strong>CrazyGames</strong><small>Big collection of browser games</small><span class="row-arrow">↗</span></a>
+      <a href="https://itch.io/games/html5" target="_blank" rel="noopener noreferrer"><span class="site-icon site-orange">✿</span><strong>itch.io HTML5</strong><small>Independent games to explore</small><span class="row-arrow">↗</span></a>
+      <a href="https://poki.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-green">●</span><strong>Poki</strong><small>Quick games for your browser</small><span class="row-arrow">↗</span></a>
+      <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-blue">G</span><strong>Google Search</strong><small>Search the web</small><span class="row-arrow">↗</span></a>
+    </div></div>`,
+  notepad: `<div class="notepad-toolbar"><span>Untitled — Notepad</span><span>Text stays in this tab only</span></div><textarea class="notepad-area" aria-label="Notepad text" placeholder="Start typing..."></textarea>`,
+  calculator: `<div class="calculator-wrap"><div class="calculator-heading"><span>Calculator</span><small>Standard</small></div><output class="calculator-display" id="calculator-display" aria-live="polite">0</output>
+    <div class="calculator-keys">
+      <button data-calc="clear">C</button><button data-calc="sign">±</button><button data-calc="operator" data-value="÷">÷</button><button data-calc="operator" data-value="×">×</button>
+      <button data-calc="digit" data-value="7">7</button><button data-calc="digit" data-value="8">8</button><button data-calc="digit" data-value="9">9</button><button data-calc="operator" data-value="−">−</button>
+      <button data-calc="digit" data-value="4">4</button><button data-calc="digit" data-value="5">5</button><button data-calc="digit" data-value="6">6</button><button data-calc="operator" data-value="+">+</button>
+      <button data-calc="digit" data-value="1">1</button><button data-calc="digit" data-value="2">2</button><button data-calc="digit" data-value="3">3</button><button class="equals-key" data-calc="equals">=</button>
+      <button class="zero-key" data-calc="digit" data-value="0">0</button><button data-calc="decimal">.</button>
+    </div></div>`,
+  settings: `<div class="app-toolbar"><strong>Settings</strong><span class="app-muted">Make this desktop yours</span></div><div class="settings-content">
+    <div class="settings-heading"><span class="settings-big-icon">⚙</span><div><h2>Personalization</h2><p>Choose the feel of your Playfield desktop.</p></div></div>
+    <div class="setting-row"><div><strong>Desktop wallpaper</strong><small>Switch between the blue and evening color themes.</small></div><button class="toggle-button" id="wallpaper-toggle" type="button" aria-pressed="false">Try evening colors</button></div>
+    <div class="setting-row"><div><strong>Privacy</strong><small>Apps here are demos and external links; this page stores no personal data.</small></div><span class="setting-status">On this device</span></div>
+    <p class="privacy-note">Playfield is an original desktop-style demo, not Windows and not affiliated with Microsoft.</p>
+  </div>`,
+  games: `<div class="app-toolbar"><strong>Games</strong><span class="app-muted">Your little game library</span></div>
+    <div class="games-heading"><div><span class="mini-label">BROWSER ARCADE</span><h2>Pick your next game</h2></div>
+      <div class="game-filters"><button class="selected" data-game-filter="all">All</button><button data-game-filter="Puzzle">Puzzle</button><button data-game-filter="Cozy">Cozy</button><button data-game-filter="Action">Action</button></div></div>
+    <div class="game-list">${gameLinks.map((game) => `<a class="game-row" data-category="${game.category}" href="${game.url}" target="_blank" rel="noopener noreferrer"><span class="game-row-icon">${game.category === "Puzzle" ? "▦" : game.category === "Cozy" ? "☼" : "✦"}</span><span class="game-row-copy"><strong>${game.name}</strong><small>${game.description}</small></span><span class="game-category">${game.category}</span><span class="row-arrow">↗</span></a>`).join("")}</div>
+    <p class="privacy-note">External games only work where permitted. Availability and age ratings vary by site.</p>`,
+  guide: `<div class="guide-wrap"><div class="app-hero"><span class="mini-label">LOCAL DEMO · NOT A LIVE AI</span><h2>Play Guide</h2><p>Tell the guide your mood and get a suggestion from this page. Messages are not sent or stored.</p></div>
+    <div class="guide-chat" id="guide-chat" aria-live="polite"><div class="guide-message">Hi! Want something cozy, a quick puzzle, or an action game?</div></div>
+    <form class="guide-form" id="guide-form"><label class="sr-only" for="guide-input">Message the play guide</label><input id="guide-input" maxlength="160" placeholder="What are you in the mood for?" autocomplete="off"><button type="submit">Send</button></form>
+    <p class="privacy-note">I can't help bypass school filters or device rules. Play only where permitted.</p></div>`
+};
+
+function buildStartMenu() {
+  appCatalog.forEach((app) => {
+    const entry = app.url ? document.createElement("a") : document.createElement("button");
+    entry.className = "start-app";
+    entry.dataset.search = `${app.name} ${app.keywords}`;
+    if (app.url) {
+      entry.href = app.url;
+      entry.target = "_blank";
+      entry.rel = "noopener noreferrer";
+      entry.addEventListener("click", closeStartMenu);
+    } else {
+      entry.type = "button";
+      entry.dataset.app = app.id;
+    }
+    const icon = document.createElement("span");
+    icon.className = `app-icon ${app.icon}`;
+    icon.textContent = app.glyph;
+    const title = document.createElement("span");
+    title.textContent = app.name;
+    entry.append(icon, title);
+    startAppGrid.append(entry);
+  });
+}
+
+function closeStartMenu() {
+  startMenu.hidden = true;
+  startButton.setAttribute("aria-expanded", "false");
+}
+
+function openApp(appId) {
+  const app = appCatalog.find((item) => item.id === appId);
+  if (!app) return;
+  if (app.url) {
+    window.open(app.url, "_blank", "noopener,noreferrer");
+    closeStartMenu();
+    return;
+  }
+  const appNames = {
+    explorer: "File Explorer",
+    store: "Store",
+    notepad: "Notepad",
+    calculator: "Calculator",
+    settings: "Settings",
+    games: "Games",
+    guide: "Play Guide"
+  };
+  document.querySelector("#window-title").textContent = appNames[appId];
+  document.querySelector("#window-app-icon").textContent = app.glyph;
+  document.querySelector("#window-app-icon").className = `window-app-icon ${app.icon}`;
+  taskbarAppTitle.textContent = appNames[appId];
+  taskbarApp.querySelector(".taskbar-app-icon").textContent = app.glyph;
+  taskbarApp.querySelector(".taskbar-app-icon").className = `taskbar-app-icon ${app.icon}`;
+  appContent.innerHTML = templates[appId];
+  appWindow.hidden = false;
+  appWindow.classList.remove("is-maximized");
+  document.querySelector("#maximize-window").setAttribute("aria-pressed", "false");
+  taskbarApp.hidden = false;
+  taskbarApp.setAttribute("aria-pressed", "true");
+  closeStartMenu();
+  if (appId === "calculator") setupCalculator();
+  if (appId === "guide") setupGuide();
+  if (appId === "settings") setupSettings();
+  if (appId === "games") setupGameFilters();
+}
+
+document.addEventListener("click", (event) => {
+  const launcher = event.target.closest("[data-app]");
+  if (launcher) openApp(launcher.dataset.app);
+});
+
+startButton.addEventListener("click", () => {
+  startMenu.hidden = !startMenu.hidden;
+  startButton.setAttribute("aria-expanded", String(!startMenu.hidden));
+  if (!startMenu.hidden) startSearch.focus();
+});
+
+startSearch.addEventListener("input", () => {
+  const query = startSearch.value.trim().toLowerCase();
+  startAppGrid.querySelectorAll(".start-app").forEach((entry) => {
+    entry.hidden = query !== "" && !entry.dataset.search.toLowerCase().includes(query);
   });
 });
 
-const chatForm = document.querySelector("#chat-form");
-const chatInput = document.querySelector("#chat-input");
-const chatMessages = document.querySelector("#chat-messages");
-
-function addMessage(text, kind) {
-  const message = document.createElement("div");
-  message.className = `message ${kind}-message`;
-  if (kind === "guide") {
-    const avatar = document.createElement("span");
-    avatar.className = "message-avatar";
-    avatar.setAttribute("aria-hidden", "true");
-    avatar.textContent = "✳";
-    message.append(avatar);
-  }
-  const paragraph = document.createElement("p");
-  paragraph.textContent = text;
-  message.append(paragraph);
-  chatMessages.append(message);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function suggestGame(query) {
-  if (/puzz|brain|think|number|word/i.test(query)) {
-    return "A puzzle sounds right—try 2048 for numbers or Word Wipe for a word hunt. Tap a game card to open its site.";
-  }
-  if (/cozy|calm|relax|chill|creative|quiet/i.test(query)) {
-    return "For a calmer break, try Little Alchemy 2 and experiment, or take Eggy Car for a bumpy little drive.";
-  }
-  if (/action|fast|quick|compete|energy|multiplayer/i.test(query)) {
-    return "Ready for some energy? Shell Shockers has arena action, while Tag is a quick chase. Check the game site's rules and availability.";
-  }
-  if (/opera|gx|browser/i.test(query)) {
-    return "The Opera GX shortcut is in the top-right corner. It opens Opera's official site in a new tab; this page doesn't install or control the browser.";
-  }
-  if (/google|search|web/i.test(query)) {
-    return "Use the Google Search link in the Start menu or footer to open Google in a new tab. Playfield doesn't embed or control a browser.";
-  }
-  if (/school|blocked|filter|bypass|unblock/i.test(query)) {
-    return "I can't help bypass school filters or device rules. Use games and websites only when your network and school policies allow them.";
-  }
-  return "This little guide works from a few built-in suggestions, not a live AI. Try asking for a puzzle, something cozy, or action—and only play where permitted.";
-}
-
-chatForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const text = chatInput.value.trim();
-  if (!text) return;
-  addMessage(text, "user");
-  addMessage(suggestGame(text), "guide");
-  chatInput.value = "";
-  chatInput.focus();
-});
-
-const appWindow = document.querySelector("#app-window");
-const startButton = document.querySelector("#start-button");
-const startMenu = document.querySelector("#start-menu");
-const taskbarApp = document.querySelector("#taskbar-app");
-const maximizeButton = document.querySelector("#maximize-window");
-const desktopClock = document.querySelector("#desktop-clock");
-
-function setStartMenuOpen(open) {
-  startMenu.hidden = !open;
-  startButton.setAttribute("aria-expanded", String(open));
-}
-
-startButton.addEventListener("click", () => {
-  setStartMenuOpen(startMenu.hidden);
-});
-
-document.querySelectorAll("[data-close-start]").forEach((item) => {
-  item.addEventListener("click", () => setStartMenuOpen(false));
-});
-
 document.addEventListener("click", (event) => {
-  if (!startMenu.hidden && !startMenu.contains(event.target) && !startButton.contains(event.target)) {
-    setStartMenuOpen(false);
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") setStartMenuOpen(false);
+  const taskbarSearch = document.querySelector("#web-search-form");
+  if (!startMenu.hidden && !startMenu.contains(event.target) && !startButton.contains(event.target) && !taskbarSearch.contains(event.target)) closeStartMenu();
 });
 
 document.querySelector("#minimize-window").addEventListener("click", () => {
   appWindow.hidden = true;
   taskbarApp.setAttribute("aria-pressed", "false");
 });
-
 document.querySelector("#close-window").addEventListener("click", () => {
   appWindow.hidden = true;
   taskbarApp.setAttribute("aria-pressed", "false");
 });
-
+document.querySelector("#maximize-window").addEventListener("click", (event) => {
+  const maximized = appWindow.classList.toggle("is-maximized");
+  event.currentTarget.setAttribute("aria-pressed", String(maximized));
+});
 taskbarApp.addEventListener("click", () => {
   appWindow.hidden = false;
   taskbarApp.setAttribute("aria-pressed", "true");
-  setStartMenuOpen(false);
+  closeStartMenu();
 });
 
-maximizeButton.addEventListener("click", () => {
-  const maximized = appWindow.classList.toggle("is-maximized");
-  maximizeButton.setAttribute("aria-pressed", String(maximized));
+document.querySelector("#web-search-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const query = document.querySelector("#web-search").value.trim();
+  if (query) window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank", "noopener,noreferrer");
+  else {
+    startMenu.hidden = false;
+    startButton.setAttribute("aria-expanded", "true");
+    startSearch.focus();
+  }
 });
 
-function updateClock() {
-  desktopClock.textContent = new Intl.DateTimeFormat(undefined, {
-    hour: "numeric",
-    minute: "2-digit"
-  }).format(new Date());
+document.querySelector("#web-search").addEventListener("focus", () => {
+  startMenu.hidden = false;
+  startButton.setAttribute("aria-expanded", "true");
+  startSearch.value = document.querySelector("#web-search").value;
+  startSearch.dispatchEvent(new Event("input"));
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeStartMenu();
+});
+
+function setupGameFilters() {
+  appContent.querySelectorAll("[data-game-filter]").forEach((button) => {
+    button.addEventListener("click", () => {
+      appContent.querySelectorAll("[data-game-filter]").forEach((item) => item.classList.toggle("selected", item === button));
+      appContent.querySelectorAll(".game-row[data-category]").forEach((game) => {
+        game.hidden = button.dataset.gameFilter !== "all" && game.dataset.category !== button.dataset.gameFilter;
+      });
+    });
+  });
 }
 
+function setupSettings() {
+  const button = document.querySelector("#wallpaper-toggle");
+  button.addEventListener("click", () => {
+    const evening = desktop.classList.toggle("evening-wallpaper");
+    button.setAttribute("aria-pressed", String(evening));
+    button.textContent = evening ? "Use blue wallpaper" : "Try evening colors";
+  });
+}
+
+function setupCalculator() {
+  const display = document.querySelector("#calculator-display");
+  let current = "0";
+  let stored = null;
+  let operator = null;
+  let replaceCurrent = false;
+  function show(value) {
+    current = String(value).slice(0, 14);
+    display.textContent = current;
+  }
+  appContent.querySelector(".calculator-keys").addEventListener("click", (event) => {
+    const key = event.target.closest("[data-calc]");
+    if (!key) return;
+    const action = key.dataset.calc;
+    const value = key.dataset.value;
+    if (action === "clear") {
+      stored = null; operator = null; replaceCurrent = false; show("0");
+    } else if (action === "digit") {
+      show(replaceCurrent || current === "0" ? value : current + value);
+      replaceCurrent = false;
+    } else if (action === "decimal") {
+      if (replaceCurrent) { show("0."); replaceCurrent = false; }
+      else if (!current.includes(".")) show(`${current}.`);
+    } else if (action === "sign") {
+      show(String(Number(current) * -1));
+    } else if (action === "operator") {
+      stored = Number(current); operator = value; replaceCurrent = true;
+    } else if (action === "equals" && stored !== null && operator) {
+      const right = Number(current);
+      const result = operator === "+" ? stored + right
+        : operator === "−" ? stored - right
+          : operator === "×" ? stored * right
+            : right === 0 ? "Error" : stored / right;
+      stored = null; operator = null; replaceCurrent = true; show(result);
+    }
+  });
+}
+
+function guideReply(text) {
+  if (/puzz|brain|think|number|word/i.test(text)) return "Try 2048 for a number puzzle or Word Wipe for a word hunt.";
+  if (/cozy|calm|relax|chill|creative|quiet/i.test(text)) return "Little Alchemy 2 is creative, and Eggy Car is a mellow little drive.";
+  if (/action|fast|quick|compete|energy|multiplayer/i.test(text)) return "Shell Shockers and Tag are the action picks in Games.";
+  if (/opera|gx|browser/i.test(text)) return "Open the Opera GX desktop shortcut for Opera's official site. This demo doesn't install or control a browser.";
+  if (/google|search|web/i.test(text)) return "Use the Google Search shortcut or the taskbar search to search the web.";
+  if (/school|blocked|filter|bypass|unblock/i.test(text)) return "I can't help bypass school filters or device rules. Use games and websites only where permitted.";
+  return "I'm a local demo with a few built-in suggestions. Ask for something cozy, a puzzle, or action.";
+}
+
+function setupGuide() {
+  const form = document.querySelector("#guide-form");
+  const input = document.querySelector("#guide-input");
+  const chat = document.querySelector("#guide-chat");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    const userMessage = document.createElement("div");
+    userMessage.className = "guide-message user-guide-message";
+    userMessage.textContent = text;
+    const reply = document.createElement("div");
+    reply.className = "guide-message";
+    reply.textContent = guideReply(text);
+    chat.append(userMessage, reply);
+    chat.scrollTop = chat.scrollHeight;
+    input.value = "";
+    input.focus();
+  });
+}
+
+function updateClock() {
+  const now = new Date();
+  document.querySelector("#desktop-time").textContent = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).format(now);
+  document.querySelector("#tray-time").textContent = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).format(now);
+  const date = new Intl.DateTimeFormat(undefined, { month: "numeric", day: "numeric", year: "numeric" }).format(now);
+  document.querySelector("#desktop-date").textContent = date;
+  document.querySelector("#tray-date").textContent = date;
+}
+
+buildStartMenu();
 updateClock();
 window.setInterval(updateClock, 30_000);
