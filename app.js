@@ -13,7 +13,8 @@ const gameLinks = [
   { name: "Shell Shockers", category: "Action", description: "Egg-shaped action in a lively arena.", url: "https://www.crazygames.com/game/shell-shockers" },
   { name: "Word Wipe", category: "Puzzle", description: "Spot words, clear the board, beat the clock.", url: "https://www.crazygames.com/game/word-wipe" },
   { name: "Little Alchemy 2", category: "Cozy", description: "Mix simple things to discover something new.", url: "https://www.crazygames.com/game/little-alchemy-2" },
-  { name: "Tag", category: "Action", description: "Dash around and don't be the one who's it.", url: "https://www.crazygames.com/game/tag" }
+  { name: "Tag", category: "Action", description: "Dash around and don't be the one who's it.", url: "https://www.crazygames.com/game/tag" },
+  { name: "Subway Surfers: Miami", category: "Action", description: "Dodge obstacles and dash through the Miami streets.", url: "https://browlu27.github.io/gamessite.github.io/projects/subway-surfers-unity/miami.html" }
 ];
 
 const appCatalog = [
