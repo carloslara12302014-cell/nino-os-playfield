@@ -12,7 +12,7 @@
     <meta property="og:type" content="website">
     <title>Playfield Desktop | Nino OS-inspired launcher</title>
     <link rel="stylesheet" href="desktop.css?v=6">
-    <script src="app.js?v=5" defer></script>
+    <script src="app.js?v=6" defer></script>
   </head>
   <body>
     <main class="desktop" id="desktop">
@@ -55,7 +55,7 @@
       </section>
 
       <section class="start-menu" id="start-menu" aria-label="Start menu" hidden>
-        <div class="start-header"><strong>Welcome</strong><span>Your apps, all in one place</span></div>
+        <div class="start-header"><strong>Apps</strong><span>Open or switch apps without leaving this desktop</span></div>
         <label class="sr-only" for="start-search">Search apps</label>
         <input id="start-search" class="start-search" type="search" placeholder="Search apps">
         <div class="start-section-title">Pinned</div>
@@ -66,8 +66,9 @@
 
     <nav class="taskbar" aria-label="Desktop taskbar">
       <div class="taskbar-center">
-        <button type="button" class="taskbar-button start-button" id="start-button" aria-label="Open Start menu" aria-expanded="false">
+        <button type="button" class="taskbar-button start-button" id="start-button" aria-label="Open Apps menu" title="Open apps" aria-expanded="false">
           <span class="pane-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="start-button-label">Apps</span>
         </button>
         <form class="taskbar-search" id="web-search-form">
           <label class="sr-only" for="web-search">Search apps or the web</label>
