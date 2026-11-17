@@ -25,6 +25,7 @@ const appCatalog = [
   { id: "calculator", name: "Calculator", glyph: "＋", icon: "icon-calculator", keywords: "math numbers" },
   { id: "settings", name: "Settings", glyph: "⚙", icon: "icon-settings", keywords: "personalize wallpaper" },
   { id: "games", name: "Games", glyph: "✦", icon: "icon-games", keywords: "arcade play puzzle action" },
+  { id: "movies", name: "Movies", glyph: "▶", icon: "icon-movies", keywords: "tubi films streaming tv shows" },
   { id: "guide", name: "Play Guide", glyph: "✳", icon: "icon-guide", keywords: "helper suggestions chat" },
   { id: "opera", name: "Opera GX", glyph: "O", icon: "icon-opera", url: "https://www.opera.com/gx", keywords: "browser web gaming" },
   { id: "google", name: "Google Search", glyph: "G", icon: "icon-google", url: "https://www.google.com/", keywords: "search web internet" }
@@ -44,6 +45,7 @@ const templates = {
       <a href="https://www.crazygames.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-purple">◈</span><strong>CrazyGames</strong><small>Big collection of browser games</small><span class="row-arrow">↗</span></a>
       <a href="https://itch.io/games/html5" target="_blank" rel="noopener noreferrer"><span class="site-icon site-orange">✿</span><strong>itch.io HTML5</strong><small>Independent games to explore</small><span class="row-arrow">↗</span></a>
       <a href="https://poki.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-green">●</span><strong>Poki</strong><small>Quick games for your browser</small><span class="row-arrow">↗</span></a>
+      <a href="https://tubitv.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-red">▶</span><strong>Tubi</strong><small>Movies and TV shows</small><span class="row-arrow">↗</span></a>
       <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-blue">G</span><strong>Google Search</strong><small>Search the web</small><span class="row-arrow">↗</span></a>
     </div>
     <p class="privacy-note">The App Store logo is a trademark of Apple Inc.; this project is not affiliated with Apple. <a href="https://logos-world.net/" target="_blank" rel="noopener noreferrer">Logo source</a>.</p></div>`,
@@ -68,6 +70,10 @@ const templates = {
     <a class="all-games-shortcut" href="https://browlu27.github.io/gamessite.github.io/" target="_blank" rel="noopener noreferrer"><span class="all-games-icon">✦</span><span><strong>All Games</strong><small>Open the full game collection</small></span><span class="row-arrow">↗</span></a>
     <div class="game-list">${gameLinks.map((game) => `<a class="game-row" data-category="${game.category}" href="${game.url}" target="_blank" rel="noopener noreferrer"><span class="game-row-icon">${game.category === "Puzzle" ? "▦" : game.category === "Cozy" ? "☼" : "✦"}</span><span class="game-row-copy"><strong>${game.name}</strong><small>${game.description}</small></span><span class="game-category">${game.category}</span><span class="row-arrow">↗</span></a>`).join("")}</div>
     <p class="privacy-note">External games only work where permitted. Availability and age ratings vary by site. The PlayStation icon is a trademark of Sony Interactive Entertainment; this project is not affiliated with Sony or PlayStation. <a href="https://commons.wikimedia.org/wiki/File:PlayStation_App_Icon.jpg" target="_blank" rel="noopener noreferrer">Icon source</a>.</p>`,
+  movies: `<div class="app-toolbar"><strong>Movies</strong><span class="app-muted">Streaming picks</span></div>
+    <div class="app-page"><div class="app-hero"><span class="mini-label">MOVIES &amp; TV</span><h2>Find something to watch</h2><p>Browse the official Tubi catalog of movies and shows.</p></div>
+    <div class="site-grid"><a href="https://tubitv.com/" target="_blank" rel="noopener noreferrer"><span class="site-icon site-red">▶</span><strong>Tubi</strong><small>Watch movies and TV on Tubi</small><span class="row-arrow">↗</span></a></div>
+    <p class="privacy-note">Tubi opens in a new tab. Its catalog, availability, ads, and age ratings are controlled by Tubi. Use only where permitted.</p></div>`,
   guide: `<div class="guide-wrap"><div class="app-hero"><span class="mini-label">LOCAL DEMO · NOT A LIVE AI</span><h2>Play Guide</h2><p>Tell the guide your mood and get a suggestion from this page. Messages are not sent or stored.</p></div>
     <div class="guide-chat" id="guide-chat" aria-live="polite"><div class="guide-message">Hi! Want something cozy, a quick puzzle, or an action game?</div></div>
     <form class="guide-form" id="guide-form"><label class="sr-only" for="guide-input">Message the play guide</label><input id="guide-input" maxlength="160" placeholder="What are you in the mood for?" autocomplete="off"><button type="submit">Send</button></form>
@@ -118,6 +124,7 @@ function openApp(appId) {
     calculator: "Calculator",
     settings: "Settings",
     games: "Games",
+    movies: "Movies",
     guide: "Play Guide"
   };
   document.querySelector("#window-title").textContent = appNames[appId];
