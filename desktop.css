@@ -105,7 +105,7 @@ a { color: inherit; text-decoration: none; }
 .icon-calculator { color: transparent; font-size: 0; background: #f4f4f4 url("https://tse1.mm.bing.net/th/id/OIP.1cg4ErXyTbfnevnHamNuoQHaD4?r=0&w=1200&h=630&rs=1&pid=ImgDetMain&o=7&rm=3") center / cover no-repeat; }
 .icon-settings { color: #5d7087; background: linear-gradient(145deg,#fff,#e1e9f2); }
 .icon-games { color: transparent; font-size: 0; background: #10131d url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/PlayStation_App_Icon.jpg/960px-PlayStation_App_Icon.jpg") center / cover no-repeat; }
-.icon-movies { color: #fff; background: linear-gradient(145deg,#d9283f,#9e1228); font-size: 19px; }
+.icon-tubi { color: #fff; background: linear-gradient(145deg,#d9283f,#9e1228); font-size: 19px; }
 .icon-guide { color: transparent; font-size: 0; background: #fff url("https://img.icons8.com/pulsar-line/1200/chatgpt.jpg") center / cover no-repeat; }
 .icon-opera { color: #c33c52; background: linear-gradient(145deg,#fff,#ffe1e7); font-size: 19px; }
 .icon-google { color: #4285f4; background: linear-gradient(145deg,#fff,#f1f5fb); font-size: 21px; }
